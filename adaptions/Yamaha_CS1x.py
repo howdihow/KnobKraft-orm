@@ -183,35 +183,35 @@ def isCurrentPerformanceLayerResponse(message):
 ##################### program request
 
 
-def createProgramDumpRequest(channel, pp):
-    return (createUserPerformanceCommonQuery(pp) +
-            createUserPerformanceEffectsQuery(pp) +
-            createUserPerformanceModulationsQuery(pp) +
-            createUserPerformanceLayerQuery(pp, 0) +
-            createUserPerformanceLayerQuery(pp, 1) +
-            createUserPerformanceLayerQuery(pp, 2) +
-            createUserPerformanceLayerQuery(pp, 3))
-
-
-def isPartOfSingleProgramDump(message):
-    return (isUserPerformanceCommonResponse(message) or
-            isUserPerformanceEffectsResponse(message) or
-            isUserPerformanceModulationsResponse(message) or
-            isUserPerformanceLayerResponse(message))
-
-
-def isSingleProgramDump(message):
-    messages = splitSysexMessage(message)
-    if (len(messages) > 7):
-        raise Exception("Not a single program dump!")
-    return (len(messages) == 7 and
-            isUserPerformanceCommonResponse(messages[0]) and
-            isUserPerformanceEffectsResponse(messages[1]) and
-            isUserPerformanceModulationsResponse(messages[2]) and
-            isUserPerformanceLayerResponse(messages[3]) and
-            isUserPerformanceLayerResponse(messages[4]) and
-            isUserPerformanceLayerResponse(messages[5]) and
-            isUserPerformanceLayerResponse(messages[6]))
+# def createProgramDumpRequest(channel, pp):
+#     return (createUserPerformanceCommonQuery(pp) +
+#             createUserPerformanceEffectsQuery(pp) +
+#             createUserPerformanceModulationsQuery(pp) +
+#             createUserPerformanceLayerQuery(pp, 0) +
+#             createUserPerformanceLayerQuery(pp, 1) +
+#             createUserPerformanceLayerQuery(pp, 2) +
+#             createUserPerformanceLayerQuery(pp, 3))
+#
+#
+# def isPartOfSingleProgramDump(message):
+#     return (isUserPerformanceCommonResponse(message) or
+#             isUserPerformanceEffectsResponse(message) or
+#             isUserPerformanceModulationsResponse(message) or
+#             isUserPerformanceLayerResponse(message))
+#
+#
+# def isSingleProgramDump(message):
+#     messages = splitSysexMessage(message)
+#     if (len(messages) > 7):
+#         raise Exception("Not a single program dump!")
+#     return (len(messages) == 7 and
+#             isUserPerformanceCommonResponse(messages[0]) and
+#             isUserPerformanceEffectsResponse(messages[1]) and
+#             isUserPerformanceModulationsResponse(messages[2]) and
+#             isUserPerformanceLayerResponse(messages[3]) and
+#             isUserPerformanceLayerResponse(messages[4]) and
+#             isUserPerformanceLayerResponse(messages[5]) and
+#             isUserPerformanceLayerResponse(messages[6]))
 
 
 def convertToProgramDump(channel, message, program_number):
