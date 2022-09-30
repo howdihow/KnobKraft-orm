@@ -27,7 +27,7 @@ def channelIfValidDeviceResponse(message):
             and message[2] == 0x30  # Device ID
             and message[3] == 0x04):  # DW-6000
         # Sadly, there is no way to figure out which channel the Korg DW-6000 is set to
-        return 1
+        return 0
     return -1
 
 
@@ -58,6 +58,14 @@ def numberOfPatchesPerBank():
 def nameFromDump(message):
     # The DW-6000 has no patch name memory, so all patches get the same name for a start
     return "DW-6000"
+
+
+def isDefaultName(patchName):
+    return patchName == "DW-6000"
+
+
+def friendlyProgramName(program):
+    return "%d%d" % (program // 8 + 1, (program % 8) + 1)
 
 
 def convertToEditBuffer(channel, message):
